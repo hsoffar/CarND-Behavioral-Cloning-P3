@@ -54,9 +54,9 @@ using nivida model
 #### 2. Attempts to reduce overfitting in the model
 
 In an effort to reduce overfitting and increase my model's ability to generalize for driving on unseen roads, I artificially increased my dataset using a couple of proven image augmentation techniques. 
-1- adjusting the brightness of the images. 
-2- scaling up or down the V channel by a random factor
-3- crop the top 40 pixels and the bottom 20 pixels from each image in order to remove any noise from the sky or trees in the top of the images and the car's hood from the bottom of the image.
+- adjusting the brightness of the images. 
+- scaling up or down the V channel by a random factor
+- crop the top 40 pixels and the bottom 20 pixels from each image in order to remove any noise from the sky or trees in the top of the images and the car's hood from the bottom of the image.
 
 ### 3. Data Collection
 I used only the sample data provided by Udacity to train my model
@@ -88,7 +88,7 @@ Will run the video at 48 FPS. The default FPS is 60.
 ## Please run1.mp4
 
 ### Recources
-Python Environment: CarND-Term1-Starter-Kit
-Nvidia paper: End to End Learning for Self-Driving Cars
-Project specification: Udacity Rubrics
-Udacity repository: CarND-Behavioral-Cloning-P3
+* Python Environment: CarND-Term1-Starter-Kit
+* Nvidia paper: End to End Learning for Self-Driving Cars
+* Project specification: Udacity Rubrics
+* Udacity repository: CarND-Behavioral-Cloning-P3
