@@ -48,8 +48,8 @@ The model.py file contains the code for training and saving the convolution neur
 ### Model Architecture and Training Strategy
 
 #### 1. An appropriate model architecture has been employed
+The Nivida Model is used as a startign point.
 
-using nivida model
 ![alt text][image1]
 #### 2. Attempts to reduce overfitting in the model
 
