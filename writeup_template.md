@@ -54,74 +54,29 @@ using nivida model
 #### 2. Attempts to reduce overfitting in the model
 
 In an effort to reduce overfitting and increase my model's ability to generalize for driving on unseen roads, I artificially increased my dataset using a couple of proven image augmentation techniques. 
-1 -adjusting the brightness of the images. 
-2 -scaling up or down the V channel by a random factor
-3-crop the top 40 pixels and the bottom 20 pixels from each image in order to remove any noise from the sky or trees in the top of the images and the car's hood from the bottom of the image.
+1- adjusting the brightness of the images. 
+2- scaling up or down the V channel by a random factor
+3- crop the top 40 pixels and the bottom 20 pixels from each image in order to remove any noise from the sky or trees in the top of the images and the car's hood from the bottom of the image.
 
 ### 3. Data Collection
 I used only the sample data provided by Udacity to train my model
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
+The data provided by Udacity contains only steering angles for the center image, so in order to effectively use the left and right images during training, I added an offset of .275 to the left images and subtracted .275 from the right images. 
+Applying the steps mentioned in the "attempts to reduce overfiting"
 
-For details about how I created the training data, see the next section. 
+The model was trained on:
 
-### Model Architecture and Training Strategy
+Hardware:
+Processor: Intel i5
+Graphics card: GeForce GTX 700
 
-#### 1. Solution Design Approach
+the model was run on a GPU
 
-The overall strategy for deriving a model architecture was to ...
+The entire set of images used for training would consume a large amount of memory. A python generator is used so that only a single batch is contained in memory at a time.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
-
-#### 2. Final Model Architecture
-
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
-
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
-
-
-
-#### 3. Creation of the Training Set & Training Process
-
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
-
-![alt text][image2]
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
-
-##using video.py
+### using video.py
 python video.py run1
 Creates a video based on images found in the run1 directory. The name of the video will be the name of the directory followed by '.mp4', so, in this case the video will be run1.mp4.
 
@@ -130,4 +85,10 @@ Optionally, one can specify the FPS (frames per second) of the video:
 python video.py run1 --fps 48
 Will run the video at 48 FPS. The default FPS is 60.
 
+## Please run1.mp4
 
+### Recources
+Python Environment: CarND-Term1-Starter-Kit
+Nvidia paper: End to End Learning for Self-Driving Cars
+Project specification: Udacity Rubrics
+Udacity repository: CarND-Behavioral-Cloning-P3
