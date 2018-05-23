@@ -127,3 +127,14 @@ After the collection process, I had X number of data points. I then preprocessed
 I finally randomly shuffled the data set and put Y% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+##using video.py
+python video.py run1
+Creates a video based on images found in the run1 directory. The name of the video will be the name of the directory followed by '.mp4', so, in this case the video will be run1.mp4.
+
+Optionally, one can specify the FPS (frames per second) of the video:
+
+python video.py run1 --fps 48
+Will run the video at 48 FPS. The default FPS is 60.
+
+
