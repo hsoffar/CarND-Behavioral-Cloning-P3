@@ -11,8 +11,8 @@ import eventlet.wsgi
 from PIL import Image
 from flask import Flask
 from io import BytesIO
-import helper
 
+import scipy.misc
 from keras.models import load_model
 import h5py
 from keras import __version__ as keras_version
@@ -22,7 +22,12 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
-
+def crop(image, top_percent, bottom_percent):
+    top = int(np.ceil(image.shape[0] * top_percent))
+    bottom = image.shape[0] - int(np.ceil(image.shape[0] * bottom_percent))
+    return image[top:bottom, :]
+def resize(image, new_dim):
+    return scipy.misc.imresize(image, new_dim)
 class SimplePIController:
     def __init__(self, Kp, Ki):
         self.Kp = Kp
@@ -63,8 +68,8 @@ def telemetry(sid, data):
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
 
-        image_array = helper.crop(image_array, 0.35, 0.1)
-        image_array = helper.resize(image_array, new_dim=(64, 64))
+        image_array = crop(image_array, 0.35, 0.1)
+        image_array = resize(image_array, new_dim=(64, 64))
 
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 

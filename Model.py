@@ -17,13 +17,13 @@ from scipy.stats import bernoulli
 
 tf.python.control_flow_ops = tf
 # Some useful constants
-DRIVING_LOG_FILE = './../../data/data/driving_log.csv'
-IMG_PATH = './../../data/data/'
+DRIVING_LOG_FILE = './data/data/driving_log.csv'
+IMG_PATH = './data/data/'
 STEERING_COEFFICIENT = 0.2
 
 num_epochs = 7
 num_samples_per_epoch = 20000
-num_validation_samples = 3000
+num_validation_samples = 6000
 rate = 0.0001
 def crop(image, top_percent, bottom_percent):
     top = int(np.ceil(image.shape[0] * top_percent))
@@ -41,7 +41,10 @@ def random_flip(image, steering_angle, flipping_prob=0.5):
         return image, steering_angle
 
 def random_gamma(image):
-    # apply gamma correction using the lookup table
+    gamma = np.random.uniform(0.4, 1.5)
+    inv_gamma = 1.0 / gamma
+    table = np.array([((i / 255.0) ** inv_gamma) * 255
+                      for i in np.arange(0, 256)]).astype("uint8")
     return cv2.LUT(image, table)
 
 def random_shear(image, steering_angle, shear_range=200):
@@ -174,8 +177,8 @@ model.summary()
 model.compile(optimizer=Adam(rate), loss="mse", )
 
 # create two generators for training and validation
-train_gen = helper.generate_next_batch()
-validation_gen = helper.generate_next_batch()
+train_gen = generate_next_batch()
+validation_gen = generate_next_batch()
 
 history = model.fit_generator(train_gen,
                               samples_per_epoch=num_samples_per_epoch,
